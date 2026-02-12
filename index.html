@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#DC143C">
+    <meta name="description" content="BRIX: o pix do povo que poupa">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="BRIX">
+    
+    <title>BRIX - App de Pagamentos</title>
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkJSSVggLSBBcHAgZGUgUGFnYW1lbnRvcyIsCiAgInNob3J0X25hbWUiOiAiQlJJWCIsCiAgImRlc2NyaXB0aW9uIjogIkJSSVg6IG8gcGl4IGRvIHBvdm8gcXVlIHBvdXBhIiwKICAic3RhcnRfdXJsIjogIi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmZmZmZmYiLAogICJ0aGVtZV9jb2xvciI6ICIjREMxNDNDIiwKICAib3JpZW50YXRpb24iOiAicG9ydHJhaXQiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSGRwWkhSb1BTSXhPVElpSUdobGFXZG9kRDBpTVRreUlqNDhjbVZqZENCM2FXUjBhRDBpTVRreUlpQm9aV2xuYUhROUlqRTVNaUlnWm1sc2JEMGlJMFJETVRReldpSXZQanh5WldOMElIZzlJalEwSWlCNVBTSTBOQ0lnZDJsa2RHZzlJakV3TkNJZ2FHVnBaMmgwUFNJeE1EUWlJR1pwYkd3OUlpTm1abVptWm1ZaUx6NDhjSEJoZEdnZ1pEMGlUVGcwSURjeU1qRWpURGMwTlNBMk1qRXhJRFkzT1NBMk16TWpJR1pwYkd3OUlpTXdNREF3TURBaUx6NDhkR1Y0ZENCNFBTSTVOaUlnZVQwaU9UWWlJR1pwYkd3OUlpTm1abVptWm1ZaUlHWnZiblF0ZDJWcFoyaDBQU0ppYjJ4a0lpQm1iMjUwTFhOcGVtVTlJalEwSWlCMFpYaDBMV0Z1WTJodmNqMGliV2xrWkd4bElqNUNVand2ZEdWNGRENDhkR1Y0ZENCNFBTSTVOaUlnZVQwaU1UTTRJaUJtYVd4c1BTSWpabVptWm1ZaUlHWnZiblF0YzJsNlpUMGlNalFpSUhSbGVIUXRZVzVqYUc5eVBTSnRhV1JrYkdVaVBsSlZQQzkwWlhoMFBqd3ZjM1puUGc9PSIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNpSUhkcFpIUm9QU0kxTVRJaUlHaGxhV2RvZEQwaU5URXlJajQ4Y21WamRDQjNhV1IwYUQwaU5URXlJaUJvWldsbmFIUTlJalV4TWlJZ1ptbHNiRDBpSTBSRE1UUXpRaUl2UGp4eVpXTjBJSGc5SWpneElpQjVQU0k0TVNJZ2QybGtkR2c5SWpNMU1DSWdhR1ZwWjJoMFBTSXpOVEFpSUdacGJHdzlJaU5tWm1abVptWWlMejQ4Y0dGMGFDQmtQU0pOTVRZd0lERXlNVEF4STA0eE16VXdJREV5TmpBeElERXhNakFnTVRNd01rTWdNVEV5TUNBeE16UXdJREV4TkRBZ01UTTJNRXhJTVRFMk1FTXhNVFl3SURFek9EQWdNVGcwTUNBeE16UXdJREU1TWpBZ01UTXhNRFlqSWlCbWFXeHNQU0lqTURBd01EQXdJaTgrUEhSbGVIUWdlRDBpTVRZMElpQjVQU0l4T0RBaUlHWnBiR3c5SWlObVptWm1abVlpSUdadmJuUXRkMlZwWjJoMFBTSmliMnhrSWlCbWIyNTBMWE5wZW1VOUlqZ3dJaUIwWlhoMExXRnVZMmh2Y2owaWJXbGtaR3hsSWo1Q1VqNGpUVE15TUNBME1ESjNOREFnTkRBZ01URTJJRFFnTURBZ05EQjZUVFF3SURReE1qTXhJRFExTUNBME16QWpJaTgrUEhSbGVIUWdlRDBpTVRZMElpQjVQU0l5TkRBaUlHWnBiR3c5SWlObVptWm1abVlpSUdadmJuUXRjMmw2WlQwaU5EQWlJSFJsZUhRdFlXNWphRzl5UFNKdGFXUmtiR1VpUGxKSlZEd3ZkR1Y0ZEQ0OEwzTjJaejQ9IiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiwKICAgICAgInB1cnBvc2UiOiAiYW55IG1hc2thYmxlIgogICAgfQogIF0KfQ==">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            overscroll-behavior: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        #root {
+            min-height: 100vh;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // Lucide Icons as React components
+        const User = ({ size = 24, className = "" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+        );
+
+        const Search = ({ size = 24, className = "" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+            </svg>
+        );
+
+        const MapPin = ({ size = 24, className = "" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+        );
+
+        const QrCode = ({ size = 24, className = "", strokeWidth = 2 }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} className={className}>
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+                <path d="M14 14h7v7h-7z"></path>
+            </svg>
+        );
+
+        const Banknote = ({ size = 24, className = "", strokeWidth = 2 }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} className={className}>
+                <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                <circle cx="12" cy="12" r="2"></circle>
+                <path d="M6 12h.01M18 12h.01"></path>
+            </svg>
+        );
+
+        const CowIcon = ({ size = 24, className = "" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
+                <ellipse cx="12" cy="14" rx="6" ry="5"/>
+                <path d="M6 11c-1-1-2-2-3-1s0 3 1 3"/>
+                <path d="M18 11c1-1 2-2 3-1s0 3-1 3"/>
+                <circle cx="9" cy="13" r="1"/>
+                <circle cx="15" cy="13" r="1"/>
+                <path d="M10 16h4"/>
+                <path d="M8 9h2"/>
+                <path d="M14 9h2"/>
+            </svg>
+        );
+
+        const Receipt = ({ size = 24, className = "", strokeWidth = 2 }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} className={className}>
+                <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1z"></path>
+                <path d="M16 8h-6M16 12h-6M16 16h-6"></path>
+            </svg>
+        );
+
+        const TrendingUp = ({ size = 24, className = "", strokeWidth = 2 }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} className={className}>
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                <polyline points="17 6 23 6 23 12"></polyline>
+            </svg>
+        );
+
+        const Lock = ({ size = 24, className = "", strokeWidth = 2 }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} className={className}>
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+        );
+
+        const BookOpen = ({ size = 24, className = "", strokeWidth = 2 }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} className={className}>
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+        );
+
+        const ArrowLeft = ({ size = 24, className = "" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+        );
+
+        const Camera = ({ size = 24, className = "" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+        );
+
+        const Users = ({ size = 24, className = "", strokeWidth = 2 }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} className={className}>
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+        );
+
+        const Pizza = ({ size = 24, className = "", strokeWidth = 2 }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} className={className}>
+                <path d="M15 11h.01"></path>
+                <path d="M11 15h.01"></path>
+                <path d="M16 16h.01"></path>
+                <path d="m2 16 20 6-6-20A20 20 0 0 0 2 16"></path>
+                <path d="M5.71 17.11a17.04 17.04 0 0 1 11.4-11.4"></path>
+            </svg>
+        );
+
+        const Box = ({ size = 24, className = "", strokeWidth = 2 }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} className={className}>
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+        );
+
+        const Eye = ({ size = 24, className = "" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+        );
+
+        const EyeOff = ({ size = 24, className = "" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+            </svg>
+        );
+
+        const Download = ({ size = 24, className = "" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+        );
+
+        const BrixApp = () => {
+            const [screen, setScreen] = useState('home');
+            const [showValues, setShowValues] = useState(true);
+            const [fluxoPeriod, setFluxoPeriod] = useState('month');
+
+            const Header = () => (
+                <div className="bg-red-600 text-white p-4 shadow-lg">
+                    <div className="flex items-center justify-between mb-2">
+                        <button onClick={() => setScreen('profile')} className="w-10 h-10 bg-black flex items-center justify-center">
+                            <User size={24} />
+                        </button>
+                        <div className="flex-1 mx-3">
+                            <div className="bg-white text-black px-3 py-2 flex items-center">
+                                <Search size={18} className="mr-2" />
+                                <input type="text" placeholder="Buscar..." className="bg-transparent outline-none flex-1 text-sm" />
+                            </div>
+                        </div>
+                        <button className="w-10 h-10 bg-black flex items-center justify-center">
+                            <MapPin size={24} />
+                        </button>
+                    </div>
+                    <div className="text-xs text-white/90">Belo Horizonte, MG</div>
+                </div>
+            );
+
+            const MainActions = () => (
+                <div className="p-6">
+                    <div className="text-center mb-6">
+                        <div className="text-xl font-bold text-red-600 mb-1">BRIX: o pix do povo que poupa</div>
+                        <div className="text-sm text-gray-600 italic">Curta seu dinheiro, curta seus amigos!</div>
+                    </div>
+                    <div className="grid grid-cols-3 gap-4">
+                        <button onClick={() => setScreen('scan')} className="flex flex-col items-center">
+                            <div className="w-20 h-20 bg-red-600 flex items-center justify-center mb-2">
+                                <QrCode size={36} className="text-white" strokeWidth={3} />
+                            </div>
+                            <span className="font-bold text-xs text-black">SCAN</span>
+                        </button>
+                        <button onClick={() => setScreen('brix')} className="flex flex-col items-center">
+                            <div className="w-20 h-20 bg-red-600 flex items-center justify-center mb-2">
+                                <Banknote size={36} className="text-white" strokeWidth={3} />
+                            </div>
+                            <span className="font-bold text-xs text-black">BRIX</span>
+                        </button>
+                        <button onClick={() => setScreen('vaquita')} className="flex flex-col items-center">
+                            <div className="w-20 h-20 bg-red-600 flex items-center justify-center mb-2">
+                                <CowIcon size={36} className="text-white" />
+                            </div>
+                            <span className="font-bold text-xs text-black">VAQUITA</span>
+                        </button>
+                    </div>
+                </div>
+            );
+
+            const MiniApps = () => (
+                <div className="px-4 py-4 bg-gray-50">
+                    <div className="text-xs font-bold mb-3 text-gray-600 uppercase">Mini-Apps</div>
+                    <div className="flex gap-3 overflow-x-auto pb-2">
+                        {['Viagem', 'Comida', 'Carro', 'Agenda', 'Saúde', 'Casa'].map((app, i) => (
+                            <div key={i} className="flex-shrink-0 w-16 text-center">
+                                <div className="w-16 h-16 bg-gray-700 flex items-center justify-center mb-1">
+                                    <div className="w-10 h-10 border-2 border-gray-300"></div>
+                                </div>
+                                <div className="text-xs font-medium text-gray-600">{app}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+
+            const FinancialEducation = () => (
+                <div className="bg-red-600 p-6 pb-6">
+                    <div className="text-sm font-bold mb-4 text-white uppercase tracking-wide">
+                        Educação e Controle Financeiro
+                    </div>
+                    <div className="flex justify-between gap-3">
+                        <button onClick={() => setScreen('extrato')} className="flex-1 flex flex-col items-center">
+                            <div className="w-16 h-16 bg-white flex items-center justify-center mb-2">
+                                <Receipt size={32} className="text-red-600" strokeWidth={3} />
+                            </div>
+                            <span className="font-bold text-xs text-white">EXTRATO</span>
+                        </button>
+                        <button onClick={() => setScreen('fluxo')} className="flex-1 flex flex-col items-center">
+                            <div className="w-16 h-16 bg-white flex items-center justify-center mb-2">
+                                <TrendingUp size={32} className="text-red-600" strokeWidth={3} />
+                            </div>
+                            <span className="font-bold text-xs text-white">FLUXO</span>
+                        </button>
+                        <button onClick={() => setScreen('tesouro')} className="flex-1 flex flex-col items-center">
+                            <div className="w-16 h-16 bg-white flex items-center justify-center mb-2">
+                                <Lock size={32} className="text-red-600" strokeWidth={3} />
+                            </div>
+                            <span className="font-bold text-xs text-white">TESOURO</span>
+                        </button>
+                        <button onClick={() => setScreen('pensa')} className="flex-1 flex flex-col items-center">
+                            <div className="w-16 h-16 bg-white flex items-center justify-center mb-2">
+                                <BookOpen size={32} className="text-red-600" strokeWidth={3} />
+                            </div>
+                            <span className="font-bold text-xs text-white">PENSA</span>
+                        </button>
+                    </div>
+                </div>
+            );
+
+            const Footer = () => (
+                <div className="fixed bottom-0 left-0 right-0 bg-white p-4 border-t-2 border-gray-200 z-50">
+                    <button onClick={() => setScreen('home')} className="w-full flex items-center justify-center">
+                        <div className="flex items-center text-xl font-bold text-red-600">
+                            <span className="mr-2 text-2xl">⬛</span>
+                            BRIX
+                        </div>
+                    </button>
+                </div>
+            );
+
+            const ScanScreen = () => (
+                <div className="min-h-screen bg-black text-white flex flex-col pb-20">
+                    <div className="p-4 flex items-center bg-red-600">
+                        <button onClick={() => setScreen('home')} className="mr-3">
+                            <ArrowLeft size={24} className="text-yellow-400" />
+                        </button>
+                        <h2 className="text-xl font-bold">SCANNER</h2>
+                    </div>
+                    <div className="flex-1 flex items-center justify-center relative">
+                        <Camera size={200} className="text-white/20 absolute" />
+                        <div className="w-64 h-64 border-4 border-white relative">
+                            <div className="absolute top-0 left-0 w-8 h-8 border-t-8 border-l-8 border-red-600"></div>
+                            <div className="absolute top-0 right-0 w-8 h-8 border-t-8 border-r-8 border-red-600"></div>
+                            <div className="absolute bottom-0 left-0 w-8 h-8 border-b-8 border-l-8 border-red-600"></div>
+                            <div className="absolute bottom-0 right-0 w-8 h-8 border-b-8 border-r-8 border-red-600"></div>
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <QrCode size={120} className="text-white/40" />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="p-6 text-center">
+                        <p className="text-lg mb-2">Aponte para o QR Code</p>
+                        <p className="text-sm text-white/60">Pagar • Receber • Cardápio • etc</p>
+                    </div>
+                </div>
+            );
+
+            const BrixScreen = () => (
+                <div className="min-h-screen bg-white flex flex-col pb-20">
+                    <div className="p-4 flex items-center bg-red-600 text-white">
+                        <button onClick={() => setScreen('home')} className="mr-3">
+                            <ArrowLeft size={24} className="text-yellow-400" />
+                        </button>
+                        <h2 className="text-xl font-bold">BRIX</h2>
+                    </div>
+                    <div className="flex-1 p-6">
+                        <div className="space-y-4">
+                            {[
+                                { icon: <User size={32} strokeWidth={3} />, title: 'EU', desc: 'Pagar alguém' },
+                                { icon: <Users size={32} strokeWidth={3} />, title: 'TU', desc: 'Receber de alguém' },
+                                { icon: <Receipt size={32} strokeWidth={3} />, title: 'ELES', desc: 'Pagar boleto/conta' }
+                            ].map((item, i) => (
+                                <button key={i} className="w-full bg-black text-white p-6 flex items-center hover:bg-gray-900">
+                                    <div className="w-16 h-16 bg-red-600 flex items-center justify-center mr-4">
+                                        {item.icon}
+                                    </div>
+                                    <div className="text-left">
+                                        <div className="font-bold text-xl">{item.title}</div>
+                                        <div className="text-sm text-white/60">{item.desc}</div>
+                                    </div>
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+
+            const VaquitaScreen = () => (
+                <div className="min-h-screen bg-white flex flex-col pb-20">
+                    <div className="p-4 flex items-center bg-red-600 text-white">
+                        <button onClick={() => setScreen('home')} className="mr-3">
+                            <ArrowLeft size={24} className="text-yellow-400" />
+                        </button>
+                        <h2 className="text-xl font-bold">VAQUITA</h2>
+                    </div>
+                    <div className="flex-1 p-6">
+                        <div className="space-y-4">
+                            {[
+                                { icon: <Lock size={32} strokeWidth={3} />, title: 'COFRE', desc: 'Poupança coletiva' },
+                                { icon: <Box size={32} strokeWidth={3} />, title: 'CAIXINHA', desc: 'Vaquinha clássica' },
+                                { icon: <Pizza size={32} strokeWidth={3} />, title: 'RACHAR', desc: 'Dividir conta' }
+                            ].map((item, i) => (
+                                <button key={i} className="w-full bg-black text-white p-6 flex items-center hover:bg-gray-900">
+                                    <div className="w-16 h-16 bg-red-600 flex items-center justify-center mr-4">
+                                        {item.icon}
+                                    </div>
+                                    <div className="text-left">
+                                        <div className="font-bold text-xl">{item.title}</div>
+                                        <div className="text-sm text-white/60">{item.desc}</div>
+                                    </div>
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+
+            return (
+                <div className="max-w-md mx-auto bg-white min-h-screen font-sans">
+                    {screen === 'home' && (
+                        <>
+                            <Header />
+                            <MainActions />
+                            <MiniApps />
+                            <FinancialEducation />
+                        </>
+                    )}
+                    {screen === 'scan' && <ScanScreen />}
+                    {screen === 'brix' && <BrixScreen />}
+                    {screen === 'vaquita' && <VaquitaScreen />}
+                    <Footer />
+                </div>
+            );
+        };
+
+        ReactDOM.render(<BrixApp />, document.getElementById('root'));
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                const swCode = `
+                    const CACHE_NAME = 'brix-v1';
+                    self.addEventListener('install', (event) => {
+                        event.waitUntil(
+                            caches.open(CACHE_NAME).then((cache) => {
+                                return cache.addAll(['/']);
+                            })
+                        );
+                    });
+                    self.addEventListener('fetch', (event) => {
+                        event.respondWith(
+                            caches.match(event.request).then((response) => {
+                                return response || fetch(event.request);
+                            })
+                        );
+                    });
+                `;
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(blob);
+                navigator.serviceWorker.register(swUrl);
+            });
+        }
+    </script>
+</body>
+</html>
